@@ -4,16 +4,41 @@
   <meta charset="UTF-8">
   <title></title>
 
+  <link rel="stylesheet" href="vendor/normalize.min.css">
   <link rel="stylesheet" href="style.css">
 
   <script src="vendor/HTML.min.js"></script>
   <script src="vendor/javascript-debounce.min.js"></script>
 </head>
 <body>
+  <div id="nav">
+    <span id="brand">
+      Hacker News <i class="diet">diet</i>
+    </span>
+    <a href="//github.com/francium/hn-diet">source</a>
+  </div>
+
   <div id="splash" class="loadingSplash">loading...</div>
-  <div id="stories"></div>
-  <textarea id="blacklist"></textarea>
+
+  <div id="stories">
+  </div>
+  <div id="blacklist">
+    <textarea placeholder="Case insensitive phrases to filter out -- such as 'Apple' or 'Mark Zuckerberg'. Refresh to see changes. Auto saved to browser's local storage."></textarea>
+  </div>
 
   <script src="app.js"></script>
+  <noscript>
+    <div class="noscript">
+      <p>
+        This web page uses javascript to load data from the Hacker New
+        API. You'll need to enable JavaScript in order to use this web page.
+      </p>
+
+      <p>
+        JavaScript is only used for core functionality -- no BS. Check out the
+        <a href="https://github.com/francium/hn-diet">source</a>.
+      </p>
+    </div>
+  </noscript>
 </body>
 </html>

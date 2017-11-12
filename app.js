@@ -9,7 +9,7 @@ function main() {
 
   const splashEl = HTML.body.query('#splash');
   const storiesEl = HTML.body.query('#stories');
-  const blacklistEl = HTML.body.query('#blacklist');
+  const blacklistEl = HTML.body.query('#blacklist > textarea');
 
   blacklistEl.value = loadBlacklist();
   const blacklist = parseBlacklist(blacklistEl.value);
@@ -37,6 +37,7 @@ function main() {
         else             throw new Error('Response not ok', response.error);
       });
   }
+
 
   function loadEachStory(storyIds) {
     return new Promise((resolve, reject) => {
@@ -92,11 +93,9 @@ function main() {
   function viewLoadingSplash(display) {
     if (splashEl) {
       if (display) {
-        splashEl.style.zIndex = 9999;
-        splashEl.style.opacity = 1;
+        splashEl.style.display = '';
       } else {
-        splashEl.style.zIndex = -9999;
-        splashEl.style.opacity = 0;
+        splashEl.style.display = 'none';
       }
     }
   }
@@ -105,8 +104,41 @@ function main() {
   function viewStories(stories) {
     for (let i=0; i<stories.length; i++) {
       const story = stories[i];
-      storiesEl.add(`div>p>a[href="${story.url}"]{${story.title}}`);
+      const storyUserUrl = `https://news.ycombinator.com/user?id=${story.by}`;
+      const storyDiscussionUrl = `https://news.ycombinator.com/item?id=${story.id}`;
+
+      const storyEl = storiesEl.add(`div[class="story"]`);
+
+      const storyTitleLineEl = storyEl.add(`div[class="storyTitleLine"]`);
+
+      const titleEmmet = 'a[href="_url_" class="storyTitle"]'
+          .replace('_url_', story.url);
+      const titleEl = storyTitleLineEl.add(titleEmmet);
+      titleEl.innerText = story.title;  // issue#1
+
+      const urlEmmet = 'a[href="_url_" class="storyUrl"]'
+          .replace('_url_', story.url);
+      const urlEl = storyTitleLineEl.add(urlEmmet);
+      urlEl.innerText = '(' + extractDomainName(story.url) + ')';  // issue#1
+
+      const detailsEl = storyEl.add(`div[class="storyDetails"]`);
+      const pointsEl = detailsEl.add(`span{${story.score} points}`);
+      const byEl = detailsEl.add(`span{by }+a{${story.by}}`);
+      const timeEl = detailsEl.add(`a{${story.time}}`);
+      const commentsEl = detailsEl.add(`a{| ${story.descendants} comments}`);
+
+      // issue#1
+      byEl.href = storyUserUrl;
+      timeEl.href = storyDiscussionUrl;
+      commentsEl.href = storyDiscussionUrl;
     }
+  }
+
+
+  function extractDomainName(url) {
+    const a = document.createElement('a');
+    a.setAttribute('href', url);
+    return a.hostname;
   }
 
 

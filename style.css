@@ -1,24 +1,115 @@
-body {
-  background: #fff0f0;
-  color: #222;
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-.loadingSplash {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: orange;
-  color: white;
-  font-size: 2em;
-  font-weight: 600;
+a {
+  text-decoration: none;
+  color: black;
 }
 
 #blacklist {
-  width: 200px;
-  height: 300px;
+  margin: 0.5em;
+  height: 15em;
+}
+
+#blacklist > textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+
+body {
+  background: #f6f6ef;
+  color: black;
+  width: 800px;
+  margin: 8px;
+}
+
+#brand {
+  font-weight: 600;
+}
+
+.diet {
+  font-family: script;
+}
+
+html {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  font-family: sans;
+}
+
+.loadingSplash {
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-weight: 600;
+}
+
+#nav {
+  background: #ff6600;
+  padding: 0.25em;
+  padding-right: 0.33em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.noscript {
+  padding: 1em 3em 1em 3em;
+}
+
+.noscript a {
+  color: #ff6600;
+}
+
+#stories {
+  padding: 0.5em;
+  padding-top: 1em;
+}
+
+#stories:last-child {
+  margin-bottom: 0;
+}
+
+.story {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+}
+
+.storyTitleLine {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.1em;
+}
+
+.storyTitle:visited {
+  color: gray;
+}
+
+.storyUrl {
+  margin-left: 0.33em;
+  font-size: 0.75em;
+  color: gray;
+}
+
+.storyDetails {
+  font-size: 0.67em;
+  color: gray;
+  display: flex;
+}
+
+.storyDetails > * {
+  margin-left: 0.33em;
+}
+
+.storyDetails > a {
+  color: gray;
+}
+
+.storyDetails > a:hover {
+  text-decoration: underline;
 }
