@@ -180,16 +180,27 @@ function main() {
 
 
   function parseBlacklist(value) {
+    const domains = [];
+    const titles = [];
+
     const valueTrimmed = value.trim();
 
-    if (!valueTrimmed.length) {
-      return [];
+    if (valueTrimmed.length) {
+      const lines = valueTrimmed
+        .trim()
+        .split('\n')
+        .map(phrase => phrase.trim());
+
+      lines.forEach(line => {
+        if (line.slice(0, 5) === 'site:') {
+          domains.push(line.slice(5, line.length).trim());
+        } else {
+          titles.push(line);
+        }
+      });
     }
 
-    return valueTrimmed
-      .trim()
-      .split('\n')
-      .map(phrase => phrase.trim());
+    return {domains, titles};
   }
 
 
@@ -201,7 +212,7 @@ function main() {
 
   function handleStoryLoad() {
       viewLoadingSplash(false);
-      const filteredStories = filterStoriesByTitle(stories, blacklistFilter(blacklist));
+      const filteredStories = filterStoriesByTitle(stories, blacklistFilter(blacklist.titles), blacklistFilter(blacklist.domains));
       viewStories(filteredStories);
   }
 

@@ -15,9 +15,20 @@ stories. The current implementation, partially due to the API, isn't optimal. Fo
 example, you have to request each story as a separate request. Some optimizations should
 reduce this overhead, such as local caching.
 
-The current filter is based on a blacklist of phrases. Each lines (of the text area on
-the web page) is used to filter the story titles. There are plans to expand this
-filtering to be more flexible -- for example to filter out domain names.
+The current filter is based on a blacklist of phrases and domains. Each lines (of the
+text area on the web page) is used to filter the story titles or domain if prefixed with
+'site:'.
+
+Example of a blacklist:
+
+```
+site: wired.com
+site: cnn.com
+Congress
+```
+
+This blacklist will filter out any domain that has the string "wired.com" or "cnn.com",
+as well as filter out any story title that has "Congress" in it.
 
 Blacklists are stored locally and auto save. The page much be reloaded for the changes to
 apply (sorry no fancy stuff, this is all very prototypical right now).
