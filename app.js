@@ -1,18 +1,15 @@
 function main() {
 
-  /* Explicit global variables */
+  /* Explicit global imports (a poor man's imports) */
   const HTML = window.HTML;  // html.js
   const debounce = window.debounce;  // debounce.js
 
   const MAX_STORIES = 30;
   const DEBOUNCE_TIME = 1000;
 
-  const splashEl = HTML.body.query('#splash');
-  const storiesEl = HTML.body.query('#stories');
-  const blacklistEl = HTML.body.query('#blacklist > textarea');
-
-  blacklistEl.value = loadBlacklist();
-  const blacklist = parseBlacklist(blacklistEl.value);
+  const HACKER_NEWS_URL_BASE = 'https://news.ycombinator.com'
+  const HACKER_NEWS_URL_USER = HACKER_NEWS_URL_BASE + '/user?id={{ id }}';
+  const HACKER_NEWS_URL_STORY = HACKER_NEWS_URL_BASE + '/item?id={{ id }}';
 
   const hn_api = {
     stories: {
@@ -25,6 +22,13 @@ function main() {
     }
   };
 
+  const splashEl = HTML.body.query('#splash');
+  const storiesEl = HTML.body.query('#stories');
+  const blacklistEl = HTML.body.query('#blacklist > textarea');
+
+  blacklistEl.value = loadBlacklist();
+  const blacklist = parseBlacklist(blacklistEl.value);
+
   const stories = {
     length: 0
   };
@@ -36,6 +40,15 @@ function main() {
         if (response.ok) return response.json();
         else             throw new Error('Response not ok', response.error);
       });
+  }
+
+
+  function processStoryData(storyData) {
+    if (!storyData.url) {
+      storyData.url = HACKER_NEWS_URL_STORY.replace('{{ id }}', storyData.id);
+    }
+
+    return storyData;
   }
 
 
@@ -68,7 +81,7 @@ function main() {
       storyIds.forEach((storyId, rank) => {
         httpGet(hn_api.story(storyId))
           .then(data => {
-            stories[rank] = data;
+            stories[rank] = processStoryData(data);
             stories.length++;
             updateStoriesLeft(data.id);
           }).catch(error => {
@@ -104,8 +117,8 @@ function main() {
   function viewStories(stories) {
     for (let i=0; i<stories.length; i++) {
       const story = stories[i];
-      const storyUserUrl = `https://news.ycombinator.com/user?id=${story.by}`;
-      const storyDiscussionUrl = `https://news.ycombinator.com/item?id=${story.id}`;
+      const storyUserUrl = HACKER_NEWS_URL_USER.replace('{{ id }}', story.by);
+      const storyDiscussionUrl = HACKER_NEWS_URL_STORY.replace('{{ id }}', story.id);
 
       const storyEl = storiesEl.add(`div[class="story"]`);
 
@@ -128,6 +141,8 @@ function main() {
       const commentsEl = detailsEl.add(`a{| ${story.descendants} comments}`);
 
       // issue#1
+      titleEl.href = story.url;
+      urlEl.href = story.url;
       byEl.href = storyUserUrl;
       timeEl.href = storyDiscussionUrl;
       commentsEl.href = storyDiscussionUrl;
