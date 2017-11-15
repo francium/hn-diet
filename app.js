@@ -138,7 +138,7 @@ function main() {
       const pointsEl = detailsEl.add(`span{${story.score} points}`);
       const byEl = detailsEl.add(`span{by }+a{${story.by}}`);
       const timeEl = detailsEl.add(`a{${story.time}}`);
-      const commentsEl = detailsEl.add(`a{| ${story.descendants} comments}`);
+      const commentsEl = detailsEl.add(`span{ | }+a{${story.descendants} comments}`);
 
       // issue#1
       titleEl.href = story.url;

@@ -6,7 +6,6 @@ a {
   text-decoration: none;
   color: black;
 }
-
 #blacklist {
   margin: 0.5em;
   height: 15em;
@@ -37,7 +36,7 @@ html {
   background: #fff;
   display: flex;
   justify-content: center;
-  font-family: sans;
+  font-family: Verdana, Geneva, sans-serif;
 }
 
 .loadingSplash {
@@ -81,8 +80,6 @@ html {
 }
 
 .storyTitleLine {
-  display: flex;
-  align-items: flex-end;
   margin-bottom: 0.1em;
 }
 
@@ -112,4 +109,40 @@ html {
 
 .storyDetails > a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    margin: 0;
+    width: 100%;
+  }
+
+  #nav {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    padding: 0.5em;
+    height: 3em;
+  }
+
+  #stories {
+    padding: 1em;
+  }
+
+  .story {
+    margin-bottom: 1em;
+    line-height: 1.25em;
+  }
+
+  .storyTitleLine {
+    font-size: 110%;
+  }
+
+  .storyDetails {
+    font-size: 0.8em;
+  }
 }
