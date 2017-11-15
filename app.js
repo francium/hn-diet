@@ -7,7 +7,7 @@ function main() {
   const MAX_STORIES = 30;
   const DEBOUNCE_TIME = 1000;
 
-  const HACKER_NEWS_URL_BASE = 'https://news.ycombinator.com'
+  const HACKER_NEWS_URL_BASE = 'https://news.ycombinator.com';
   const HACKER_NEWS_URL_USER = HACKER_NEWS_URL_BASE + '/user?id={{ id }}';
   const HACKER_NEWS_URL_STORY = HACKER_NEWS_URL_BASE + '/item?id={{ id }}';
 
@@ -43,7 +43,37 @@ function main() {
   }
 
 
+  /**
+   * Credits: stackoverflow/sky-sanders
+   */
+  function timeSince(unixtime) {
+    const date = new Date(unixtime);
+    const seconds = Math.round((new Date() - date) / 999);
+
+    let interval = Math.round(seconds / 31535999);
+
+    if (interval > 1) {
+      return interval + " years ago";
+    }
+    interval = Math.round(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months ago";
+    }
+    interval = Math.round(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days ago";
+    }
+    interval = Math.round(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours ago";
+    }
+    interval = Math.round(seconds / 60);
+    return interval + " minutes ago";
+  }
+
+
   function processStoryData(storyData) {
+    storyData.time *= 1000;
     if (!storyData.url) {
       storyData.url = HACKER_NEWS_URL_STORY.replace('{{ id }}', storyData.id);
     }
@@ -137,7 +167,7 @@ function main() {
       const detailsEl = storyEl.add(`div[class="storyDetails"]`);
       const pointsEl = detailsEl.add(`span{${story.score} points}`);
       const byEl = detailsEl.add(`span{by }+a{${story.by}}`);
-      const timeEl = detailsEl.add(`a{${story.time}}`);
+      const timeEl = detailsEl.add(`a{${timeSince(story.time)}}`);
       const commentsEl = detailsEl.add(`span{ | }+a{${story.descendants} comments}`);
 
       // issue#1
