@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>diet Hacker New</title>
+
+  <link rel="stylesheet" href="vendor/normalize.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="vendor/HTML.min.js"></script>
+  <script src="vendor/javascript-debounce.min.js"></script>
+</head>
+<body>
+  <div id="nav">
+    <span id="brand">
+      <a href="/">
+        <i class="diet">diet</i> Hacker News
+      </a>
+    </span>
+    <div class="nav-links">
+      <a href="about.html">about</a>
+      <a href="//github.com/francium/hn-diet">source</a>
+    </div>
+  </div>
+
+  <div class="about-body">
+    <div>
+      <h2>About</h2>
+
+      <p>
+        This project was inspired by Paul Houle's
+        <a href="http://ontology2.com/essays/HackerNewsForHackers/">Hacker News for Hackers article.</a>
+      </p>
+
+      <p>
+        The current filter is based on a blacklist of phrases and domains. Each
+        lines (of the text area on the web page) is used to filter the story titles
+        or domain if prefixed with 'site:'.
+      </p>
+
+      <p>
+        Example of a blacklist:
+
+        <pre>
+          site:aws.amazon.com
+          site:bbc.com
+          site:bloomberg.com
+          site:nytimes.com
+          site:qz.com
+          site:reuters.com
+          site:techcrunch.com
+          site:theatlantic.com
+          site:theverge.com
+          site:www.economist.com
+          site:www.theguardian.com
+          site:www.vox.com
+          site:www.washingtonpost.com
+          site:zdnet.com
+          bitcoin
+          housing market
+          (IOT.*security)|(security.*IOT)
+          apple
+          instagram
+          iphone
+          is hiring
+        </pre>
+
+        As you can see, it does support regular expressions, so you have some
+        freedom to play around and create somewhat complex patterns to match on.
+      </p>
+
+      <h2>Privacy</h2>
+
+      <p>
+        This site uses the Hacker News Firebase API to get the data. This site
+        is served directly from GitHub Pages. You are welcome, and encouraged,
+        to see the source code on <a href="https://github.com/francium/hn-diet">github/francium/hn-diet</a>.
+      </p>
+
+      <p>
+        No information is stored by this website directly. There maybe
+        information that GitHub or Firebase store as a consequence of using
+        their services -- such as when you request this page from GitHub Pages
+        and when this site loads data using the Firebase Hacker News API. For
+        information stored by Github or Firebase, please review their
+        respective privacy policies.
+      </p>
+
+      <p>
+        As an experiment, and to get a sense of the number of people making use
+        of this website, an image will be loaded from the GitHub repo every
+        time the main page of this website is loaded. This information will be
+        stored on the GitHub repo for this website. This is done strictly to
+        get a rough estimate of the popularity of this website only, and I will
+        not have access to any specific information.
+      </p>
+
+      <P>
+        Being an experiment, I do not know if it will actually work.
+      </P>
+
+      <p>
+        This method of collecting basic analytic data was chosen over services
+        like Google Analytics to better respect user privacy, and not force
+        users to expose their information to an additional party.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -6,6 +6,15 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.about-body {
+  padding: 1em;
+}
+
+.about-body a {
+  color: #ff6600;
+}
+
 #blacklist {
   margin: 0.5em;
   height: 15em;
@@ -53,6 +62,10 @@ html {
   padding-right: 0.33em;
   display: flex;
   justify-content: space-between;
+}
+
+.nav-links a {
+  margin-left: 0.5em;
 }
 
 .noscript {
