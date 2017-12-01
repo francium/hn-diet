@@ -1,7 +1,7 @@
 > Dieting: the practice of consuming content in a regulated and supervised fashion
 
 Inspired by Paul Houle's [Hacker News for Hackers
-article](ontology2.com/essays/HackerNewsForHackers/).
+article](http://ontology2.com/essays/HackerNewsForHackers/).
 
 Paul mentions the irrelevance of many articles posted to Hacker News. Depending on who
 you ask, these articles will vary. This is of course not a complex machine learning
